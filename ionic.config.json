@@ -1,6 +1,6 @@
 {
   "name": "financeApp",
-  "app_id": "",
+  "app_id": "b958a3b0",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
