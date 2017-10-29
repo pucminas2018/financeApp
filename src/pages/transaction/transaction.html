@@ -1,0 +1,91 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'TRANSACTION_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form (submit)="doTransaction()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label fixed>{{ 'DATA' | translate }}</ion-label>
+        <ion-datetime displayFormat="DD/MM/YY" pickerFormat="DD/MM/YY" [(ngModel)]="transaction.data" name="data"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>{{ 'DESCRICAO' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="transaction.descricao" name="descricao"  placeholder=""></ion-input>
+      </ion-item>
+   
+        <ion-item>
+          <ion-label>{{ 'TIPO_TRANSACAO' | translate }}</ion-label>
+        </ion-item>
+
+          <div class="recuar-esquerda">
+              <ion-grid>
+                  <ion-row>
+                    <ion-col col-6>
+                        <ion-item>
+                            <ion-label>{{ 'TIPO_DEBITO_TRANSACAO' | translate }}</ion-label>
+                            <ion-radio checked="true" value="debito"  name="tipoTransacao"></ion-radio>
+                          </ion-item>
+                   
+                    </ion-col>
+                    <ion-col col-6>
+                        <ion-item>
+                            <ion-label>{{ 'TIPO_CREDITO_TRANSACAO' | translate }}</ion-label>
+                            <ion-radio checked="false" value="credito" name="tipoTransacao"></ion-radio>
+                          </ion-item>
+                    </ion-col>
+                  </ion-row>
+                 
+                </ion-grid>
+                    
+          </div>
+
+        <ion-item>
+          <ion-label>{{ 'FATURA' | translate }}</ion-label>
+          <ion-select [(ngModel)]="transaction.fatura" name="fatura">
+            <ion-option value="1">Setembro/2017</ion-option>
+            <ion-option value="2">Outubro/2017</ion-option>
+            <ion-option value="3">Novembro/2017</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{ 'CATEGORIA' | translate }}</ion-label>
+          <ion-select [(ngModel)]="transaction.categoria" name="categoria">
+            <ion-option value="1">Roupa</ion-option>
+            <ion-option value="2">Carro</ion-option>
+            <ion-option value="3">Comida</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{ 'CONTA' | translate }}</ion-label>
+          <ion-select [(ngModel)]="transaction.conta" name="conta">
+            <ion-option value="1">16515615</ion-option>
+            <ion-option value="2">52416516</ion-option>
+            <ion-option value="3">84785211</ion-option>
+          </ion-select>
+        </ion-item>
+
+
+      <!--
+      Want to add a Username? Here you go:
+
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
+      </ion-item>
+      -->
+
+
+      <div padding>
+        <button ion-button color="primary" block>{{ 'REGISTRATION_BUTTON' | translate }}</button>
+      </div>
+
+    </ion-list>
+  </form>
+</ion-content>
