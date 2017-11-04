@@ -43,6 +43,7 @@
 
   "WELCOME_TITLE": "Bem-vindo",
 
+  "VALOR": "Valor",
   "LOGIN_TITLE": "Entrar",
   "LOGIN_ERROR": "Não foi possível entrar na sua conta. Verifique seus dados e tente novamente.",
   "LOGIN_BUTTON": "Entrar",
@@ -50,7 +51,6 @@
   "SIGNUP_ERROR": "Não foi possível criar sua conta. Verifique seus dados e tente novamente.",
   "SIGNUP_BUTTON": "Cadastre-se",
 
-  "LIST_MASTER_TITLE": "Itens",
 
   "ITEM_CREATE_TITLE": "Novo Item",
   "ITEM_CREATE_CHOOSE_IMAGE": "Adicionar Imagem",
@@ -65,6 +65,7 @@
   "CATEGORIA": "Categoria",
 
   "CONTA": "Conta",
+  "CONTAS": "Contas",
   "CREDIT_CARD_OPERADORA": "Operadora",
   "CREDIT_CARD_LIMITE":"Limite",
   "CREDIT_CARD_TITLE": "Cartão de Crédito",
@@ -83,5 +84,11 @@
   "CARDS_TITLE": "Social",
 
   "SEARCH_TITLE": "Busca",
-  "SEARCH_PLACEHOLDER": "Procure um item da lista, ex: \"Donald Duck\""
+  "SEARCH_PLACEHOLDER": "Procure um item da lista, ex: \"Donald Duck\"",
+
+  "INVOICE_TITLE":"Fatura",
+  "INVOICE_DATA_FECHA": "Fechamento",
+  "INVOICE_DATA_PAG": "Pagamento",
+  "INVOICE_MESREF": "Mês Referência"
+
 }

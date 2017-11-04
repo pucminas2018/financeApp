@@ -27,7 +27,7 @@ export class ListMasterPage {
    * modal and then adds the new item to our data source if the user created one.
    */
   addItem() {
-    let addModal = this.modalCtrl.create('ItemCreatePage');
+    let addModal = this.modalCtrl.create('TransactionPage');
     addModal.onDidDismiss(item => {
       if (item) {
         this.items.add(item);
@@ -47,7 +47,7 @@ export class ListMasterPage {
    * Navigate to the detail page for this item.
    */
   openItem(item: Item) {
-    this.navCtrl.push('ItemDetailPage', {
+    this.navCtrl.push('TransactionPage', {
       item: item
     });
   }

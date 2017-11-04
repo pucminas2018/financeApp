@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'INVOICE_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+ 
+
+<ion-content>
+  <form (submit)="doInvoice()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label fixed>{{ 'INVOICE_DATA_FECHA' | translate }}</ion-label>
+        <ion-datetime displayFormat="DD/MM/YY" pickerFormat="DD/MM/YY" [(ngModel)]="invoice.dataFechamentoFatura" name="dataFechamentoFatura"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>{{ 'INVOICE_DATA_PAG' | translate }}</ion-label>
+        <ion-datetime displayFormat="DD/MM/YY" pickerFormat="DD/MM/YY" [(ngModel)]="invoice.dataPagamentoFatura" name="dataPagamentoFatura"></ion-datetime>
+      </ion-item>
+   
+      <ion-item>
+        <ion-label fixed>{{ 'VALOR' | translate }}</ion-label>
+        <ion-input type="number" [(ngModel)]="invoice.valorTotal" name="valorTotal"></ion-input>
+      </ion-item>
+
+        <ion-item>
+          <ion-label>{{ 'INVOICE_MESREF' | translate }}</ion-label>
+          <ion-select [(ngModel)]="invoice.mesReferencia" name="mesReferencia">
+            <ion-option value="1">09/2017</ion-option>
+            <ion-option value="2">10/2017</ion-option>
+            <ion-option value="3">12/2017</ion-option>
+            <ion-option value="4">01/2018</ion-option>
+          </ion-select>
+        </ion-item>
+
+      <div padding>
+        <button ion-button color="primary" block>{{ 'REGISTRATION_BUTTON' | translate }}</button>
+      </div>
+
+    </ion-list>
+  </form>
+</ion-content>

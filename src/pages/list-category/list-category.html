@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'CONTAS' | translate }}</ion-title>
+
+    <button menuToggle ion-button icon-only clear>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let item of currentItems">
+      <button ion-item (click)="openItem(item)">        
+        <h2>{{item.descricao}}</h2>
+      </button> 
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+          {{ 'DELETE_BUTTON' | translate }}
+        </button>
+      </ion-item-options>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom>
+      <button ion-fab (click)="openItem()"><ion-icon name="add" ></ion-icon></button>
+    
+    </ion-fab>
+</ion-content>

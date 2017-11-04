@@ -1,14 +1,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
+    
+      <ion-title>{{ 'TAB1_TITLE' | translate }}</ion-title>
 
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addItem()">
-        <ion-icon name="add"></ion-icon>
+      <button menuToggle ion-button icon-only clear>
+        <ion-icon name="menu"></ion-icon>
       </button>
-    </ion-buttons>
-  </ion-navbar>
+
+    </ion-navbar>
 
 </ion-header>
 
@@ -29,4 +29,9 @@
       </ion-item-options>
     </ion-item>
   </ion-list>
+
+  <ion-fab right bottom>
+      <button ion-fab (click)="openItem()"><ion-icon name="add" ></ion-icon></button>
+    
+    </ion-fab>
 </ion-content>

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
+import { User, Items} from '../../providers/providers';
 import { MainPage } from '../pages';
+
+
 
 @IonicPage()
 @Component({
@@ -27,10 +29,13 @@ export class TransactionPage {
   private transactionErrorString: string;
 
   constructor(public navCtrl: NavController,
-    public user: User,
+    public user: User, 
+    public navParams: NavParams, 
+    public items: Items,
     public toastCtrl: ToastController,
     public translateService: TranslateService) {
 
+      this.transaction = navParams.get('item') || items.defaultItem;
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.transactionErrorString = value;
     })
