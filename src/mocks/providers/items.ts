@@ -16,42 +16,62 @@ export class Items {
   constructor() {
     let items = [
       {
-        "name": "Burt Bear",
-        "profilePic": "assets/img/speakers/bear.jpg",
-        "about": "Burt is a Bear."
+        "codTransacao": 64,
+        "valor": 10.00,
+        "descricao": "Avaliação Física",
+        "dataTransacao": "2017-09-28",
+        "tipoTransacao": "credito",       
+        "categoria": {
+          "codCategoria": 8,
+          "descricao": "Academia",
+        },
+        "conta": {
+          "codConta": 4782,
+          "tituloConta": "Bradesco",
+          "saldoInicial": 150.00,
+          "incluirTelaPrincipal": true,
+          "tipo-conta": {
+            "codTipoConta": 1,
+            "descricao": "poupança",
+            "usuario": {}
+          },
+          "usuario": {
+            "codUsuario": 82850,
+            "nomeUsuario": "Fulano da Silva",
+            "senhaUsuario": "123456",
+            "emailUsuario": "fulano@gmail.com"
+          }
+        }
       },
       {
-        "name": "Charlie Cheetah",
-        "profilePic": "assets/img/speakers/cheetah.jpg",
-        "about": "Charlie is a Cheetah."
+        "codTransacao": 64,
+        "valor": 10.00,
+        "descricao": "Avaliação Física",
+        "dataTransacao": "2017-09-28",
+        "tipoTransacao": "debito",       
+        "categoria": {
+          "codCategoria": 8,
+          "descricao": "Academia",
+        },
+        "conta": {
+          "codConta": 4782,
+          "tituloConta": "Bradesco",
+          "saldoInicial": 150.00,
+          "incluirTelaPrincipal": true,
+          "tipo-conta": {
+            "codTipoConta": 1,
+            "descricao": "poupança",
+            "usuario": {}
+          },
+          "usuario": {
+            "codUsuario": 82850,
+            "nomeUsuario": "Fulano da Silva",
+            "senhaUsuario": "123456",
+            "emailUsuario": "fulano@gmail.com"
+          }
+        }
       },
-      {
-        "name": "Donald Duck",
-        "profilePic": "assets/img/speakers/duck.jpg",
-        "about": "Donald is a Duck."
-      },
-      {
-        "name": "Eva Eagle",
-        "profilePic": "assets/img/speakers/eagle.jpg",
-        "about": "Eva is an Eagle."
-      },
-      {
-        "name": "Ellie Elephant",
-        "profilePic": "assets/img/speakers/elephant.jpg",
-        "about": "Ellie is an Elephant."
-      },
-      {
-        "name": "Molly Mouse",
-        "profilePic": "assets/img/speakers/mouse.jpg",
-        "about": "Molly is a Mouse."
-      },
-      {
-        "name": "Paul Puppy",
-        "profilePic": "assets/img/speakers/puppy.jpg",
-        "about": "Paul is a Puppy."
-      }
     ];
-
     for (let item of items) {
       this.items.push(new Item(item));
     }

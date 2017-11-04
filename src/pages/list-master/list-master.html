@@ -15,21 +15,18 @@
 <ion-content>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let item of currentItems">
-      <button ion-item (click)="openItem(item)">
-        <ion-avatar item-start>
-          <img [src]="item.profilePic" />
-        </ion-avatar>
-        <h2>{{item.name}}</h2>
-        <p>{{item.about}}</p>
-        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
-      </button>
-
+    <ion-item *ngFor="let item of currentItems">
+      <button ion-item (click)="openItem(item)">        
+        <h2>{{item.descricao}}</h2>
+        <p>{{item.categoria.descricao}}</p>
+        <ion-note item-end *ngIf="item.tipoTransacao == 'credito'" color="primary">{{item.valor | currency : "BRL":true }}</ion-note>
+        <ion-note item-end *ngIf="item.tipoTransacao == 'debito'" color="danger">{{item.valor | currency : "BRL":true }}</ion-note>
+      </button> 
       <ion-item-options>
         <button ion-button color="danger" (click)="deleteItem(item)">
           {{ 'DELETE_BUTTON' | translate }}
         </button>
       </ion-item-options>
-    </ion-item-sliding>
+    </ion-item>
   </ion-list>
 </ion-content>
