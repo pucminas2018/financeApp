@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'TAB2_TITLE' | translate }}</ion-title>
+    <ion-title>{{ 'ACCOUNTS_TYPE_TITLE' | translate }}</ion-title>
 
     <button menuToggle ion-button icon-only clear>
         <ion-icon name="menu"></ion-icon>
@@ -13,11 +13,8 @@
 <ion-content>
 
   <ion-list>
-    <button ion-item *ngFor="let item of currentItems" (click)="openItem(item)">        
-        <h2>{{item.mesReferencia}}</h2>
-        <p>{{item.dataFechamentoFatura | date: 'dd/MM/yyyy'}}</p>
-        <ion-note item-end *ngIf="!(item.dataPagamentoFatura)" color="danger">{{item.valorTotal | currency : "BRL":true }}</ion-note>
-        <ion-note item-end *ngIf="(item.dataPagamentoFatura)" color="primary">{{item.valorTotal | currency : "BRL":true }}</ion-note>
+    <button ion-item *ngFor="let item of currentItems" (click)="openItem(item)">         
+        <h2>{{item.descricao}}</h2>
       </button> 
       <ion-item-options>
         <button ion-button color="danger" (click)="deleteItem(item)">

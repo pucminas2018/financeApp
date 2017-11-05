@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
+import { User, CreditCards } from '../../providers/providers';
 import { MainPage } from '../pages';
 
 @IonicPage()
@@ -10,24 +10,29 @@ import { MainPage } from '../pages';
   selector: 'page-credit-card',
   templateUrl: 'credit-card.html'
 })
+
 export class CreditCardPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
-  // sure to add it to the type
-  creditCard: { limite: number, operadora: string, conta: number} = {
+  // sure to add it to th;e type
+  creditCard: { descricao: string,  limite: number, operadora: string, conta: object} = {
+    descricao: "",
     limite: 0,
     operadora: '',
-    conta: 0
+    conta: {codConta: 0}
   };
 
+  
   // Our translated text strings
   private creditCardErrorString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
+    public navParams: NavParams, 
+    public items: CreditCards,
     public translateService: TranslateService) {
-
+    this.creditCard = navParams.get('item') || items.defaultItem;
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.creditCardErrorString = value;
     })

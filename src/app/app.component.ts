@@ -11,7 +11,7 @@ import { Settings } from '../providers/providers';
   template: `<ion-menu [content]="content">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Pages</ion-title>
+        <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -33,12 +33,12 @@ export class MyApp {
 
   pages: any[] = [
     { title: 'Início', component: 'TabsPage' },
+    { title: 'Lançamentos', component: 'ListMasterPage' },
+    { title: 'Categoria', component: 'ListCategoryPage' },
+    { title: 'Tipo da Conta', component: 'ListAccountTypePage' },
     { title: 'Conta', component: 'ListRegAccountPage' },
-    { title: 'Tipo da Conta', component: 'ListTypeAccountPage' },
     { title: 'Cartões de Crédito', component: 'ListCreditCardPage' },
     { title: 'Fatura', component: 'ListInvoicePage' },
-    { title: 'Lançamentos', component: 'ListMasterPage' },
-    { title: 'Categoria', component: 'ListCategoryPage' }
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {

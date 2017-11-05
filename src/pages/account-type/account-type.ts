@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
+import { User, CreditCards } from '../../providers/providers';
 import { MainPage } from '../pages';
 
 @IonicPage()
@@ -24,8 +24,11 @@ export class AccountTypePage {
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
+    public navParams: NavParams, 
+    public items: CreditCards,
     public translateService: TranslateService) {
 
+    this.accountType = navParams.get('item') || items.defaultItem;
     this.translateService.get('ACCOUNT_TYPE_ERROR').subscribe((value) => {
       this.accountTypeErrorString = value;
     })

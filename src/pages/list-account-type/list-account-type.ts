@@ -2,17 +2,17 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
-import { RegAccounts } from '../../providers/providers';
+import { AccountTypes } from '../../providers/providers';
 
 @IonicPage()
 @Component({
-  selector: 'page-list-reg-acconut',
-  templateUrl: 'list-reg-account.html'
+  selector: 'page-list-account-type',
+  templateUrl: 'list-account-type.html'
 })
-export class ListRegAccountPage {
+export class ListAccountTypePage {
   currentItems: Item[];
 
-  constructor(public navCtrl: NavController, public items: RegAccounts, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController,  public items: AccountTypes, public modalCtrl: ModalController) {
     this.currentItems = this.items.query();
   }
 
@@ -27,7 +27,7 @@ export class ListRegAccountPage {
    * modal and then adds the new item to our data source if the user created one.
    */
   addItem() {
-    let addModal = this.modalCtrl.create('RegAccountPage');
+    let addModal = this.modalCtrl.create('AccountTypePage');
     addModal.onDidDismiss(item => {
       if (item) {
         this.items.add(item);
@@ -47,7 +47,7 @@ export class ListRegAccountPage {
    * Navigate to the detail page for this item.
    */
   openItem(item: Item) {
-    this.navCtrl.push('RegAccountPage', {
+    this.navCtrl.push('AccountTypePage', {
       item: item
     });
   }

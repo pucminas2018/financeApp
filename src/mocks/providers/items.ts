@@ -7,9 +7,40 @@ export class Items {
   items: Item[] = [];
 
   defaultItem: any = {
-    "name": "Burt Bear",
-    "profilePic": "assets/img/speakers/bear.jpg",
-    "about": "Burt is a Bear.",
+    "codTransacao": 0,
+    "valor": 0,
+    "descricao": "",
+    "dataTransacao": "",
+    "tipoTransacao": "debito",       
+    "categoria": {
+      "codCategoria": 0,
+      "descricao": "",
+    },
+    "fatura": {
+  "codFatura": 0,
+  "valorTotal": 0,
+  "dataFechamentoFatura": "",
+  "dataPagamentoFatura": "",
+  "mesReferencia": 0
+
+},
+    "conta": {
+      "codConta": 0,
+      "tituloConta": "",
+      "saldoInicial": 0,
+      "incluirTelaPrincipal": true,
+      "tipoConta": {
+        "codTipoConta": 0,
+        "descricao": "",
+        "usuario": {}
+      },
+      "usuario": {
+        "codUsuario": 0,
+        "nomeUsuario": "",
+        "senhaUsuario": "",
+        "emailUsuario": ""
+      }
+    }
   };
 
 
@@ -22,17 +53,25 @@ export class Items {
         "dataTransacao": "2017-09-28",
         "tipoTransacao": "credito",       
         "categoria": {
-          "codCategoria": 8,
+          "codCategoria": 1,
           "descricao": "Academia",
         },
+        "fatura": {
+      "codFatura": 19452,
+      "valorTotal": 13.09,
+      "dataFechamentoFatura": "2017-11-04",
+      "dataPagamentoFatura": "2017-12-01",
+      "mesReferencia": 2
+    
+  },
         "conta": {
-          "codConta": 4782,
+          "codConta": 1,
           "tituloConta": "Bradesco",
           "saldoInicial": 150.00,
           "incluirTelaPrincipal": true,
-          "tipo-conta": {
+          "tipoConta": {
             "codTipoConta": 1,
-            "descricao": "poupança",
+            "descricao": "Poupança",
             "usuario": {}
           },
           "usuario": {
@@ -50,15 +89,23 @@ export class Items {
         "dataTransacao": "2017-09-28",
         "tipoTransacao": "debito",       
         "categoria": {
-          "codCategoria": 8,
+          "codCategoria": 2,
           "descricao": "Academia",
         },
+        "fatura": {
+          "codFatura": 19452,
+          "valorTotal": 13.09,
+          "dataFechamentoFatura": "2017-11-04",
+          "dataPagamentoFatura": "2017-12-01",
+          "mesReferencia": 3
+        
+      },
         "conta": {
-          "codConta": 4782,
+          "codConta": 2,
           "tituloConta": "Bradesco",
           "saldoInicial": 150.00,
           "incluirTelaPrincipal": true,
-          "tipo-conta": {
+          "tipoConta": {
             "codTipoConta": 1,
             "descricao": "poupança",
             "usuario": {}

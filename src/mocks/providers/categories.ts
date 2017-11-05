@@ -7,9 +7,10 @@ export class Categories {
   items: Item[] = [];
 
   defaultItem: any = {
-    "name": "Burt Bear",
-    "profilePic": "assets/img/speakers/bear.jpg",
-    "about": "Burt is a Bear.",
+    "codCategoria": 0,
+    // "tipoTransacao": "DOC",
+    "descricao": "",
+    "usuario": {}
   };
 
 

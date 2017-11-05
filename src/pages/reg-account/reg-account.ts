@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
+import { User, RegAccounts } from '../../providers/providers';
 import { MainPage } from '../pages';
 
 @IonicPage()
@@ -14,9 +14,9 @@ export class RegAccountPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  regAccount: { titulo: string, saldo: number, conta: number} = {
-    titulo: '',
-    saldo: 0,
+  regAccount: { tituloConta: string, saldoInicial: number, conta: number} = {
+    tituloConta: '',
+    saldoInicial: 0, 
     conta: 0
   };
 
@@ -25,9 +25,12 @@ export class RegAccountPage {
 
   constructor(public navCtrl: NavController,
     public user: User,
+    public navParams: NavParams, 
+    public items: RegAccounts,
     public toastCtrl: ToastController,
     public translateService: TranslateService) {
 
+      this.regAccount = navParams.get('item') || items.defaultItem;
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.regAccountErrorString = value;
     })

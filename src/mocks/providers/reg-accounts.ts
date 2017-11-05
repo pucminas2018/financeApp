@@ -7,9 +7,16 @@ export class RegAccounts {
   items: Item[] = [];
 
   defaultItem: any = {
-    "name": "Burt Bear",
-    "profilePic": "assets/img/speakers/bear.jpg",
-    "about": "Burt is a Bear.",
+    "codConta": 0,
+    "tituloConta": "",
+    "saldoInicial": 0,
+    "incluirTelaPrincipal": true,
+    "tipoConta": {
+      "codTipoConta": 0,
+      "descricao": "",
+      "usuario": {}
+    },
+    "usuario": {}
   };
 
 
@@ -21,7 +28,7 @@ export class RegAccounts {
         "saldoInicial": 8484.54,
         "incluirTelaPrincipal": true,
         "tipoConta": {
-          "codTipoConta": 0,
+          "codTipoConta": 1,
           "descricao": "Conta Poupança",
           "usuario": {}
         },
@@ -33,7 +40,7 @@ export class RegAccounts {
         "saldoInicial": -756.54,
         "incluirTelaPrincipal": true,
         "tipoConta": {
-          "codTipoConta": 0,
+          "codTipoConta": 2,
           "descricao": "Conta Corrente",
           "usuario": {}
         },
@@ -45,7 +52,7 @@ export class RegAccounts {
         "saldoInicial": 15415.54,
         "incluirTelaPrincipal": true,
         "tipoConta": {
-          "codTipoConta": 0,
+          "codTipoConta": 3,
           "descricao": "Conta Poupança",
           "usuario": {}
         },

@@ -12,6 +12,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { Items } from '../mocks/providers/items';
 import { Categories } from '../mocks/providers/categories';
 import { Invoices } from '../mocks/providers/invoices';
+import { CreditCards } from '../mocks/providers/credit-cards';
+import { AccountTypes } from '../mocks/providers/account-types';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { RegAccounts } from '../mocks/providers/reg-accounts';
@@ -66,6 +68,8 @@ export function provideSettings(storage: Storage) {
     Categories,
     Invoices,
     RegAccounts,
+    CreditCards,
+    AccountTypes,
     User,
     Camera,
     SplashScreen,

@@ -29,19 +29,19 @@
         </ion-item>
 
           <div class="recuar-esquerda">
-              <ion-grid>
+              <ion-grid  radio-group [(ngModel)]="transaction.tipoTransacao"  name="tipoTransacao">
                   <ion-row> 
                     <ion-col col-6>
                         <ion-item>
                             <ion-label>{{ 'TIPO_DEBITO_TRANSACAO' | translate }}</ion-label>
-                            <ion-radio checked="transaction.tipoTransacao == 'credito'" value="debito" name="tipoTransacao"></ion-radio>
+                            <ion-radio checked="transaction.tipoTransacao == 'credito'" value="debito"></ion-radio>
                           </ion-item>
                    
                     </ion-col>
                     <ion-col col-6>
                         <ion-item>
                             <ion-label>{{ 'TIPO_CREDITO_TRANSACAO' | translate }}</ion-label>
-                            <ion-radio checked="transaction.tipoTransacao == 'debito'" value="credito" name="tipoTransacao"></ion-radio>
+                            <ion-radio checked="transaction.tipoTransacao == 'debito'" value="credito"></ion-radio>
                           </ion-item>
                     </ion-col>
                   </ion-row>
@@ -52,7 +52,7 @@
 
         <ion-item>
           <ion-label>{{ 'FATURA' | translate }}</ion-label>
-          <ion-select [(ngModel)]="transaction.fatura" name="fatura">
+          <ion-select [(ngModel)]="transaction.fatura.mesReferencia" name="mesReferencia">
             <ion-option value="1">Setembro/2017</ion-option>
             <ion-option value="2">Outubro/2017</ion-option>
             <ion-option value="3">Novembro/2017</ion-option>
@@ -60,7 +60,7 @@
         </ion-item>
         <ion-item>
           <ion-label>{{ 'CATEGORIA' | translate }}</ion-label>
-          <ion-select [(ngModel)]="transaction.categoria" name="categoria">
+          <ion-select [(ngModel)]="transaction.categoria.codCategoria" name="codCategoria">
             <ion-option value="1">Roupa</ion-option>
             <ion-option value="2">Carro</ion-option>
             <ion-option value="3">Comida</ion-option>
@@ -68,7 +68,7 @@
         </ion-item>
         <ion-item>
           <ion-label>{{ 'CONTA' | translate }}</ion-label>
-          <ion-select [(ngModel)]="transaction.conta" name="conta">
+          <ion-select [(ngModel)]="transaction.conta.codConta" name="codConta">
             <ion-option value="1">16515615</ion-option>
             <ion-option value="2">52416516</ion-option>
             <ion-option value="3">84785211</ion-option>

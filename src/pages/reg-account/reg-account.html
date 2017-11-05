@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'REG_ACCOUNT_TITLE' | translate }}</ion-title>
+    <ion-title>{{ 'CONTA' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -13,17 +13,17 @@
 
       <ion-item>
         <ion-label fixed>{{ 'REG_ACCOUNT_TITULO' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="regAccount.titulo" name="titulo"></ion-input>
+        <ion-input type="text" [(ngModel)]="regAccount.tituloConta" name="tituloConta"></ion-input>
       </ion-item>     
       
       <ion-item>
         <ion-label fixed>{{ 'VALOR' | translate }}</ion-label>
-        <ion-input type="number" [(ngModel)]="regAccount.saldo" name="saldo"></ion-input>
+        <ion-input type="number" [(ngModel)]="regAccount.saldoInicial" name="saldoInicial"></ion-input>
       </ion-item>
  
       <ion-item>
           <ion-label>{{ 'REG_ACCOUNT_TYPECONT' | translate }}</ion-label>
-          <ion-select [(ngModel)]="regAccount.typecont" name="typecont">
+          <ion-select [(ngModel)]="regAccount.tipoConta.codTipoConta" name="codTipoConta">
             <ion-option value="1">Conta Corrente</ion-option>
             <ion-option value="2">Conta Poupança</ion-option>
             <ion-option value="3">Conta Carteira</ion-option>

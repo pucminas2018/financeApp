@@ -4,12 +4,12 @@ import { Item } from '../../models/item';
 import { Api } from '../api/api';
 
 @Injectable()
-export class Invoices {
+export class RegAccounts {
 
   constructor(public api: Api) { }
 
   query(params?: any) {
-    return this.api.get('/fatura', params);
+    return this.api.get('/tipo-conta', params);
   }
 
   add(item: Item) {

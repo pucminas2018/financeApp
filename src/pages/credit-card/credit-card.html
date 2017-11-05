@@ -12,11 +12,16 @@
     <ion-list>
 
       <ion-item>
+        <ion-label fixed>{{ 'DESCRICAO' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="creditCard.descricao" name="descricao"></ion-input>
+      </ion-item>
+
+      <ion-item>
         <ion-label fixed>{{ 'CREDIT_CARD_LIMITE' | translate }}</ion-label>
         <ion-input type="number" [(ngModel)]="creditCard.limite" name="limite"></ion-input>
       </ion-item>
 
-   
+
         <ion-item>
           <ion-label>{{ 'CREDIT_CARD_OPERADORA' | translate }}</ion-label>
           <ion-select [(ngModel)]="creditCard.operadora" name="operadora">
@@ -29,7 +34,7 @@
         </ion-item>
         <ion-item>
           <ion-label>{{ 'CONTA' | translate }}</ion-label>
-          <ion-select [(ngModel)]="creditCard.conta" name="conta">
+          <ion-select [(ngModel)]="creditCard.conta.codConta" name="codConta">
             <ion-option value="1">16515615</ion-option>
             <ion-option value="2">52416516</ion-option>
             <ion-option value="3">84785211</ion-option>

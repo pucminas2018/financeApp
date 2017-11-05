@@ -58,9 +58,9 @@
   "ITEM_NAME_PLACEHOLDER": "Nome",
   "ITEM_ABOUT_PLACEHOLDER": "Sobre",
 
-  "TRANSACTION_TITLE": "Transação",
+  "TRANSACTION_TITLE": "Lançamento",
   "DATA": "Data",
-  "TIPO_TRANSACAO": "Tipo Transação",
+  "TIPO_TRANSACAO": "Tipo do Lançamento",
   "FATURA": "Fatura",
   "CATEGORIA": "Categoria",
 
@@ -72,6 +72,8 @@
 
   "DESCRICAO": "Descrição",
   "ACCOUNT_TYPE_TITLE": "Tipo da Conta",
+  
+  "ACCOUNTS_TYPE_TITLE": "Tipos das Contas",
 
   "DONE_BUTTON": "Pronto",
   "CANCEL_BUTTON": "Cancelar",
@@ -89,6 +91,8 @@
   "INVOICE_TITLE":"Fatura",
   "INVOICE_DATA_FECHA": "Fechamento",
   "INVOICE_DATA_PAG": "Pagamento",
-  "INVOICE_MESREF": "Mês Referência"
-
+  "INVOICE_MESREF": "Mês Referência",
+  "REG_ACCOUNT_TITULO": "Título",
+  "REG_ACCOUNT_TYPECONT": "Tipo de Conta",
+  "CREDIT_CARDS" : "Cartões de Crédito"
 }

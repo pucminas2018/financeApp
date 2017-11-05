@@ -13,8 +13,7 @@
 <ion-content>
 
   <ion-list>
-    <ion-item *ngFor="let item of currentItems">
-      <button ion-item (click)="openItem(item)">        
+    <button ion-item *ngFor="let item of currentItems" (click)="openItem(item)">        
         <h2>{{item.descricao}}</h2>
       </button> 
       <ion-item-options>
@@ -22,7 +21,6 @@
           {{ 'DELETE_BUTTON' | translate }}
         </button>
       </ion-item-options>
-    </ion-item>
   </ion-list>
 
   <ion-fab right bottom>

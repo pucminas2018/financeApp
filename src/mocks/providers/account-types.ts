@@ -3,44 +3,28 @@ import { Injectable } from '@angular/core';
 import { Item } from '../../models/item';
 
 @Injectable()
-export class Invoices {
+export class AccountTypes {
   items: Item[] = [];
 
   defaultItem: any = {
-    "codFatura": 0,
-    "valorTotal": 0,
-    "dataFechamentoFatura": "",
-    "dataPagamentoFatura": "",
-    "mesReferencia": 0
+    "codTipoConta": 0,
+    "descricao": "",
+    "usuario": {}
   };
 
 
   constructor() {
     let items = [
       {
-          "codFatura": 8744,
-          "valorTotal": 58.09,
-          "dataFechamentoFatura": "2017-11-04",
-          "dataPagamentoFatura": "2017-12-01",
-          "mesReferencia": 2
-        
+        "codTipoConta": 1,
+        "descricao": "Corrente",
+        "usuario": {}
       },
       {
-        "codFatura": 98454,
-        "valorTotal": 5528.19,
-        "dataFechamentoFatura": "2017-11-04",
-        "dataPagamentoFatura": "",
-        "mesReferencia": 3
-      
-    },
-    {
-      "codFatura": 19452,
-      "valorTotal": 13.09,
-      "dataFechamentoFatura": "2017-11-04",
-      "dataPagamentoFatura": "2017-12-01",
-      "mesReferencia": 1
-    
-  },
+        "codTipoConta": 2,
+        "descricao": "Poupança",
+        "usuario": {}
+      },
     ];
     for (let item of items) {
       this.items.push(new Item(item));

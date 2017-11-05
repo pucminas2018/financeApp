@@ -13,8 +13,7 @@
 <ion-content>
 
   <ion-list>
-    <ion-item *ngFor="let item of currentItems">
-      <button ion-item (click)="openItem(item)">        
+    <button ion-item *ngFor="let item of currentItems" (click)="openItem(item)"> 
         <h2>{{item.tituloConta}}</h2>
         <p>{{item.tipoConta.descricao }}</p>
         <ion-note item-end *ngIf="item.saldoInicial > 0 " color="primary">{{item.saldoInicial | currency : "BRL":true }}</ion-note>
@@ -25,7 +24,6 @@
           {{ 'DELETE_BUTTON' | translate }}
         </button>
       </ion-item-options>
-    </ion-item>
   </ion-list>
 
   <ion-fab right bottom>

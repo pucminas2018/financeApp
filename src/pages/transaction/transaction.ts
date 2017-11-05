@@ -12,23 +12,25 @@ import { MainPage } from '../pages';
   selector: 'page-transaction',
   templateUrl: 'transaction.html'
 })
+
 export class TransactionPage {
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
-  transaction: { data: Date, descricao: string, tipo_descricao: string, fatura: string, categoria: string, conta: number} = {
-    data: new Date(),
+  transaction: { dataTransacao: Date, descricao: string, tipoTransacao: string, codFatura: string, codCategoria: string, codConta: number, mesReferencia: number} = {
+    dataTransacao: new Date(),
     descricao: '',
-    tipo_descricao: '',
-    fatura: '',
-    categoria: '',
-    conta: 0
+    tipoTransacao: '',
+    codFatura: '',
+    codCategoria: '',
+    codConta: 0,
+    mesReferencia: 0,
   };
 
   // Our translated text strings
   private transactionErrorString: string;
 
-  constructor(public navCtrl: NavController,
+  constructor(public navCtrl: NavController, 
     public user: User, 
     public navParams: NavParams, 
     public items: Items,
