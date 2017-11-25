@@ -1,34 +1,24 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{ 'CATEGORIA' | translate }}</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>{{ 'CATEGORIA' | translate }}</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
-
 <ion-content>
-  <form (submit)="doCategory()">
-    <ion-list>
+    <form (submit)="doCategory()">
+        <ion-list>
 
-      <ion-item>
-        <ion-label fixed>{{ 'DESCRICAO' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="category.descricao" name="descricao"></ion-input>
-      </ion-item>        
-      
-      <!-- <ion-item>
-          <ion-label>{{ 'CATEGORY_TYPETRANS' | translate }}</ion-label>
-          <ion-select [(ngModel)]="category.transacao" name="transacao">
-            <ion-option value="1">DOC</ion-option>
-            <ion-option value="2">TED</ion-option>
-            <ion-option value="3">TEF</ion-option>
-          </ion-select>
-      </ion-item> -->
+            <ion-item>
+                <ion-label fixed>{{ 'DESCRICAO' | translate }}</ion-label>
+                <ion-input type="text" [(ngModel)]="category.descricao" name="descricao"></ion-input>
+            </ion-item>
 
-      <div padding>
-        <button ion-button color="primary" block>{{ 'REGISTRATION_BUTTON' | translate }}</button>
-      </div>
+            <div padding>
+                <button ion-button color="primary" block>{{ 'REGISTRATION_BUTTON' | translate }}</button>
+            </div>
 
-    </ion-list>
-  </form>
+        </ion-list>
+    </form>
 </ion-content>

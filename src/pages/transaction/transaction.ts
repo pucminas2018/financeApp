@@ -1,3 +1,5 @@
+import { Api } from './../../providers/api/api';
+import { Transaction } from './domain/transaction';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
@@ -14,18 +16,11 @@ import { MainPage } from '../pages';
 })
 
 export class TransactionPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  transaction: { dataTransacao: Date, descricao: string, tipoTransacao: string, codFatura: string, codCategoria: string, codConta: number, mesReferencia: number} = {
-    dataTransacao: new Date(),
-    descricao: '',
-    tipoTransacao: '',
-    codFatura: '',
-    codCategoria: '',
-    codConta: 0,
-    mesReferencia: 0,
-  };
+
+  transaction: Transaction = new Transaction();
+  option: any = {"Content-Type":"application/json"}
+  _user: any;
+  
 
   // Our translated text strings
   private transactionErrorString: string;
@@ -35,7 +30,8 @@ export class TransactionPage {
     public navParams: NavParams, 
     public items: Items,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public api: Api) {
 
       this.transaction = navParams.get('item') || items.defaultItem;
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
@@ -59,5 +55,24 @@ export class TransactionPage {
       });
       toast.present();
     });
+  }
+
+  postSignup(accountInfo: any) {
+    let seq = this.api.post('usuario', accountInfo, this.option).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.status == 'success') {
+        this._loggedIn(res);
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  _loggedIn(resp) {
+    this._user = resp.user;
   }
 }

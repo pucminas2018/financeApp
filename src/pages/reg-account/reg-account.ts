@@ -1,3 +1,5 @@
+import { Api } from './../../providers/api/api';
+import { RegAccount } from './domain/reg-account';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
@@ -11,16 +13,10 @@ import { MainPage } from '../pages';
   templateUrl: 'reg-account.html'
 })
 export class RegAccountPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  regAccount: { tituloConta: string, saldoInicial: number, conta: number} = {
-    tituloConta: '',
-    saldoInicial: 0, 
-    conta: 0
-  };
+  regAccount: RegAccount = new RegAccount();
+  option: any = {"Content-Type":"application/json"}
+  _user: any;
 
-  // Our translated text strings
   private regAccountErrorString: string;
 
   constructor(public navCtrl: NavController,
@@ -28,7 +24,8 @@ export class RegAccountPage {
     public navParams: NavParams, 
     public items: RegAccounts,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public api: Api) {
 
       this.regAccount = navParams.get('item') || items.defaultItem;
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
@@ -38,7 +35,7 @@ export class RegAccountPage {
 
   doRegAccount() {
     // Attempt to login in through our User service
-    this.user.signup(this.regAccount).subscribe((resp) => {
+    this.postRegAccount(this.regAccount).subscribe((resp) => {
       this.navCtrl.push(MainPage);
     }, (err) => {
 
@@ -52,5 +49,24 @@ export class RegAccountPage {
       });
       toast.present();
     });
+  }
+
+  postRegAccount(accountInfo: any) {
+    let seq = this.api.post('conta', accountInfo, this.option).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.status == 'success') {
+        this._loggedIn(res);
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  _loggedIn(resp) {
+    this._user = resp.user;
   }
 }

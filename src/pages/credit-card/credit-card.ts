@@ -1,3 +1,5 @@
+import { Api } from './../../providers/api/api';
+import { CreditCard } from './domain/credit-card';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
@@ -12,16 +14,10 @@ import { MainPage } from '../pages';
 })
 
 export class CreditCardPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to th;e type
-  creditCard: { descricao: string,  limite: number, operadora: string, conta: object} = {
-    descricao: "",
-    limite: 0,
-    operadora: '',
-    conta: {codConta: 0}
-  };
 
+  option: any = {"Content-Type":"application/json"}
+  _user: any;
+  creditCard: CreditCard = new CreditCard();
   
   // Our translated text strings
   private creditCardErrorString: string;
@@ -31,7 +27,8 @@ export class CreditCardPage {
     public toastCtrl: ToastController,
     public navParams: NavParams, 
     public items: CreditCards,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public api: Api) {
     this.creditCard = navParams.get('item') || items.defaultItem;
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.creditCardErrorString = value;
@@ -40,7 +37,7 @@ export class CreditCardPage {
 
   doCreditCard() {
     // Attempt to login in through our User service
-    this.user.signup(this.creditCard).subscribe((resp) => {
+    this.postCreditCard(this.creditCard).subscribe((resp) => {
       this.navCtrl.push(MainPage);
     }, (err) => {
 
@@ -55,4 +52,24 @@ export class CreditCardPage {
       toast.present();
     });
   }
+
+  postCreditCard(accountInfo: any) {
+    let seq = this.api.post('cartao-credito', accountInfo, this.option).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.status == 'success') {
+        this._loggedIn(res);
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  _loggedIn(resp) {
+    this._user = resp.user;
+  }
+
 }

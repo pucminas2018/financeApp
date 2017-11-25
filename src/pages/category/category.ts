@@ -1,3 +1,5 @@
+import { Category } from './domain/category';
+import { Api } from './../../providers/api/api';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
@@ -11,13 +13,9 @@ import { MainPage } from '../pages';
   templateUrl: 'category.html'
 })
 export class CategoryPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  category: { titulo: string, transacao: number} = {
-    titulo: '',
-    transacao: 0
-  };
+  category:Category = new Category();
+  option: any = {"Content-Type":"application/json"}
+  _user: any;
 
   // Our translated text strings
   private categoryErrorString: string;
@@ -27,7 +25,8 @@ export class CategoryPage {
     public navParams: NavParams, 
     public items: Categories,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public api: Api) {
 
       this.category = navParams.get('item') || items.defaultItem;      
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
@@ -37,12 +36,12 @@ export class CategoryPage {
 
   doCategory() {
     // Attempt to login in through our User service
-    this.user.signup(this.category).subscribe((resp) => {
+    this.postCategory(this.category).subscribe((resp) => {
       this.navCtrl.push(MainPage);
     }, (err) => {
-
+      
       this.navCtrl.push(MainPage);
-
+      
       let toast = this.toastCtrl.create({
         message: this.categoryErrorString,
         duration: 3000,
@@ -50,5 +49,24 @@ export class CategoryPage {
       });
       toast.present();
     });
+  }
+
+  postCategory(accountInfo: any) {
+    let seq = this.api.post('categoria', accountInfo, this.option).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.status == 'success') {
+        this._loggedIn(res);
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  _loggedIn(resp) {
+    this._user = resp.user;
   }
 }

@@ -1,3 +1,6 @@
+import { Api } from './../../providers/api/api';
+import { InvoicePageModule } from './invoice.module';
+import { Invoice } from './domain/invoice';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
@@ -11,12 +14,9 @@ import { MainPage } from '../pages';
   templateUrl: 'invoice.html'
 })
 export class InvoicePage {
-  invoice: { dataFechamentoFatura: Date, dataPagamentoFatura: Date, valorTotal: number, mesReferencia: number} = {
-    dataFechamentoFatura: new Date(),
-    dataPagamentoFatura: new Date(),
-    valorTotal: 0,
-    mesReferencia: 0
-  };
+  option: any = {"Content-Type":"application/json"}
+  _user: any;
+  invoice: Invoice = new Invoice();
 
   // Our translated text strings
   private invoiceErrorString: string;
@@ -26,7 +26,8 @@ export class InvoicePage {
     public toastCtrl: ToastController,
     public navParams: NavParams, 
     public items: Invoices,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public api: Api) {
 
       this.invoice = navParams.get('item') || items.defaultItem;
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
@@ -36,7 +37,7 @@ export class InvoicePage {
 
   doInvoice() {
     // Attempt to login in through our User service
-    this.user.signup(this.invoice).subscribe((resp) => {
+    this.postInvoice(this.invoice).subscribe((resp) => {
       this.navCtrl.push(MainPage);
     }, (err) => {
 
@@ -49,5 +50,24 @@ export class InvoicePage {
       });
       toast.present();
     });
+  }
+
+  postInvoice(accountInfo: any) {
+    let seq = this.api.post('fatura', accountInfo, this.option).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.status == 'success') {
+        this._loggedIn(res);
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  _loggedIn(resp) {
+    this._user = resp.user;
   }
 }

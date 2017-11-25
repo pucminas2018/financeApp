@@ -1,50 +1,39 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{ 'CONTA' | translate }}</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>{{ 'CONTA' | translate }}</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <form (submit)="doRegAccount()">
-    <ion-list>
+    <form (submit)="doRegAccount()">
+        <ion-list>
 
-      <ion-item>
-        <ion-label fixed>{{ 'REG_ACCOUNT_TITULO' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="regAccount.tituloConta" name="tituloConta"></ion-input>
-      </ion-item>     
-      
-      <ion-item>
-        <ion-label fixed>{{ 'VALOR' | translate }}</ion-label>
-        <ion-input type="number" [(ngModel)]="regAccount.saldoInicial" name="saldoInicial"></ion-input>
-      </ion-item>
- 
-      <ion-item>
-          <ion-label>{{ 'REG_ACCOUNT_TYPECONT' | translate }}</ion-label>
-          <ion-select [(ngModel)]="regAccount.tipoConta.codTipoConta" name="codTipoConta">
-            <ion-option value="1">Conta Corrente</ion-option>
-            <ion-option value="2">Conta Poupança</ion-option>
-            <ion-option value="3">Conta Carteira</ion-option>
-          </ion-select>
-      </ion-item>
+            <ion-item>
+                <ion-label fixed>{{ 'REG_ACCOUNT_TITULO' | translate }}</ion-label>
+                <ion-input type="text" [(ngModel)]="regAccount.tituloConta" name="tituloConta"></ion-input>
+            </ion-item>
 
+            <ion-item>
+                <ion-label fixed>{{ 'VALOR' | translate }}</ion-label>
+                <ion-input type="number" [(ngModel)]="regAccount.saldoAtual" name="saldoAtual"></ion-input>
+            </ion-item>
 
-      <!--
-      Want to add a Username? Here you go:
+            <ion-item>
+                <ion-label>{{ 'REG_ACCOUNT_TYPECONT' | translate }}</ion-label>
+                <ion-select [(ngModel)]="regAccount.tipoConta.codTipoConta" name="codTipoConta">
+                    <ion-option value="1">Conta Corrente</ion-option>
+                    <ion-option value="2">Conta Poupança</ion-option>
+                    <ion-option value="3">Conta Carteira</ion-option>
+                </ion-select>
+            </ion-item>
 
-      <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
-      </ion-item>
-      -->
+            <div padding>
+                <button ion-button color="primary" block>{{ 'REGISTRATION_BUTTON' | translate }}</button>
+            </div>
 
-
-      <div padding>
-        <button ion-button color="primary" block>{{ 'REGISTRATION_BUTTON' | translate }}</button>
-      </div>
-
-    </ion-list>
-  </form>
+        </ion-list>
+    </form>
 </ion-content>

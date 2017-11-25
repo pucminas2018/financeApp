@@ -1,3 +1,4 @@
+import { Http } from '@angular/http';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -6,9 +7,9 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://example.com/api/v1';
+  url: string = 'http://mobilefinancesapp.azurewebsites.net';
 
-  constructor(public http: HttpClient) {
+  constructor(public http: Http) {
   }
 
   get(endpoint: string, params?: any, reqOpts?: any) {
