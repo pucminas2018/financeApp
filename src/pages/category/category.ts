@@ -16,8 +16,8 @@ export class CategoryPage {
   category:Category = new Category();
   option: any = {"Content-Type":"application/json"}
   _user: any;
+  userLogged: any;
 
-  // Our translated text strings
   private categoryErrorString: string;
 
   constructor(public navCtrl: NavController,
@@ -28,6 +28,7 @@ export class CategoryPage {
     public translateService: TranslateService,
     public api: Api) {
 
+     this.userLogged  = localStorage.getItem('userLogged');
       this.category = navParams.get('item') || items.defaultItem;      
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.categoryErrorString = value;
@@ -35,7 +36,7 @@ export class CategoryPage {
   }
 
   doCategory() {
-    // Attempt to login in through our User service
+console.log(this.userLogged);
     this.postCategory(this.category).subscribe((resp) => {
       this.navCtrl.push(MainPage);
     }, (err) => {
@@ -55,7 +56,6 @@ export class CategoryPage {
     let seq = this.api.post('categoria', accountInfo, this.option).share();
 
     seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
       if (res.status == 'success') {
         this._loggedIn(res);
       }

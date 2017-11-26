@@ -1,3 +1,5 @@
+import { WelcomePage } from './../welcome/welcome';
+import { FirstRunPage } from './../pages';
 import { Api } from './../../providers/api/api';
 import { Http } from '@angular/http';
 import { Account } from './domain/account';
@@ -19,6 +21,7 @@ export class SignupPage {
   _user: any;
 
   private signupErrorString: string;
+  private signupSucessString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
@@ -29,18 +32,24 @@ export class SignupPage {
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
     })
+    this.translateService.get('SIGNUP_SUCESS').subscribe((value) => {
+      this.signupSucessString = value;
+    })
   }
 
   doSignup() {
     this.postSignup(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(WelcomePage);
+      let toast = this.toastCtrl.create({
+        message: this.signupSucessString,
+        duration: 6000,
+        position: 'top'
+      });
+      toast.present();
     }, (err) => {
-
-      this.navCtrl.push(MainPage);
-
       let toast = this.toastCtrl.create({
         message: this.signupErrorString,
-        duration: 3000,
+        duration: 6000,
         position: 'top'
       });
       toast.present();
@@ -51,14 +60,12 @@ export class SignupPage {
     let seq = this.api.post('usuario', accountInfo, this.option).share();
 
     seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
       if (res.status == 'success') {
         this._loggedIn(res);
       }
     }, err => {
       console.error('ERROR', err);
     });
-
     return seq;
   }
 

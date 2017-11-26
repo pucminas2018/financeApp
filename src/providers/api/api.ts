@@ -1,13 +1,13 @@
+import { Account } from './../../pages/signup/domain/account';
 import { Http } from '@angular/http';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-/**
- * Api is a generic REST Api handler. Set your API url first.
- */
 @Injectable()
 export class Api {
   url: string = 'http://mobilefinancesapp.azurewebsites.net';
+
+  userLogged: Account = new Account();
 
   constructor(public http: Http) {
   }
@@ -19,7 +19,6 @@ export class Api {
       };
     }
 
-    // Support easy query params for GET requests
     if (params) {
       reqOpts.params = new HttpParams();
       for (let k in params) {
@@ -28,6 +27,9 @@ export class Api {
     }
 
     return this.http.get(this.url + '/' + endpoint, reqOpts);
+  }
+  getUser(email, senha, reqOpts){
+    return this.http.get(this.url + '/usuario/'+ email +'/' + senha, reqOpts);
   }
 
   post(endpoint: string, body: any, reqOpts?: any) {
@@ -44,5 +46,13 @@ export class Api {
 
   patch(endpoint: string, body: any, reqOpts?: any) {
     return this.http.put(this.url + '/' + endpoint, body, reqOpts);
+  }
+
+  setUserLogged(user){
+    this.userLogged = user;
+  }
+
+  getUserLogged(){
+    return this.userLogged;
   }
 }

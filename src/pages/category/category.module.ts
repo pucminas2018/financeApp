@@ -1,3 +1,4 @@
+import { UserLogged } from './../user-logged';
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
@@ -10,7 +11,8 @@ import { CategoryPage } from './category';
   ],
   imports: [
     IonicPageModule.forChild(CategoryPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    UserLogged
   ],
   exports: [
     CategoryPage
