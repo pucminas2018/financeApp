@@ -16,9 +16,9 @@ export class CategoryPage {
   category:Category = new Category();
   option: any = {"Content-Type":"application/json"}
   _user: any;
-  userLogged: any;
 
   private categoryErrorString: string;
+  private categorySucessString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
@@ -28,24 +28,33 @@ export class CategoryPage {
     public translateService: TranslateService,
     public api: Api) {
 
-     this.userLogged  = localStorage.getItem('userLogged');
       this.category = navParams.get('item') || items.defaultItem;      
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.categoryErrorString = value;
-    })
-  }
-
+      this.translateService.get('CATEGORY_ERROR').subscribe((value) => {
+        this.categoryErrorString = value;
+      })
+      this.translateService.get('CATEGORY_SUCESS').subscribe((value) => {
+        this.categorySucessString = value;
+      })
+    }
+    
   doCategory() {
-console.log(this.userLogged);
+    this.category.usuario = JSON.parse(localStorage.getItem('userLogged'));
+    this.category.tipoTransacao = "";
     this.postCategory(this.category).subscribe((resp) => {
       this.navCtrl.push(MainPage);
+      let toast = this.toastCtrl.create({
+        message: this.categorySucessString,
+        duration: 6000,
+        position: 'top'
+      });
+      toast.present();
     }, (err) => {
       
       this.navCtrl.push(MainPage);
       
       let toast = this.toastCtrl.create({
         message: this.categoryErrorString,
-        duration: 3000,
+        duration: 6000,
         position: 'top'
       });
       toast.present();

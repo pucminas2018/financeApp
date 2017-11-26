@@ -50,8 +50,8 @@ export class LoginPage {
   login(accountInfo: any) {
     let seq = this.api.getUser(accountInfo.email, accountInfo.senha, this.option).share();
     seq.subscribe((res: any) => {
+      localStorage.setItem('userLogged', res._body);
       if (res.status == 'success') {
-        localStorage.setItem('userLogged', res._body);
         this._loggedIn(res);
       } else {
       }
