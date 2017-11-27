@@ -1,3 +1,4 @@
+import { ListCategoryPage } from './../list-category/list-category';
 import { Category } from './domain/category';
 import { Api } from './../../providers/api/api';
 import { Component } from '@angular/core';
@@ -41,7 +42,7 @@ export class CategoryPage {
     this.category.usuario = JSON.parse(localStorage.getItem('userLogged'));
     this.category.tipoTransacao = "";
     this.postCategory(this.category).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(ListCategoryPage);
       let toast = this.toastCtrl.create({
         message: this.categorySucessString,
         duration: 6000,
