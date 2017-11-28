@@ -32,9 +32,7 @@ export class SignupPage {
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
     })
-    this.translateService.get('SIGNUP_SUCESS').subscribe((value) => {
-      this.signupSucessString = value;
-    })
+    this.signupSucessString = "Cadastro realizado com sucesso!";
   }
 
   doSignup() {

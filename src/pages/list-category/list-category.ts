@@ -1,3 +1,5 @@
+import { Category } from './../category/domain/category';
+import { Api } from './../../providers/api/api';
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 
@@ -10,23 +12,30 @@ import { Categories } from '../../providers/providers';
   templateUrl: 'list-category.html'
 })
 export class ListCategoryPage {
+  category: Category = new Category();
   currentItems: Item[];
+  option: any = {"Content-Type":"application/json"}
+  _user: any;
 
-  constructor(public navCtrl: NavController,  public items: Categories, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
-    console.log(this.currentItems);
+  constructor(public navCtrl: NavController,  public items: Categories, public modalCtrl: ModalController,public api: Api) {
   }
 
-  /**
-   * The view loaded, let's query our items for the list
-   */
   ionViewDidLoad() {
+    this.category.usuario = JSON.parse(localStorage.getItem('userLogged'));
+    let seq = this.api.get('categoria/todas/'+this.category.usuario.codUsuario, this.option).share();
+    
+        seq.subscribe((res: any) => {
+          if (res.status == 'success') {
+            console.log(res);
+            this._loggedIn(res);
+          }
+        }, err => {
+          console.error('ERROR', err);
+        });
+    
+        return seq;
   }
 
-  /**
-   * Prompt the user to add a new item. This shows our ItemCreatePage in a
-   * modal and then adds the new item to our data source if the user created one.
-   */
   addItem() {
     let addModal = this.modalCtrl.create('CategoryPage');
     addModal.onDidDismiss(item => {
@@ -37,19 +46,17 @@ export class ListCategoryPage {
     addModal.present();
   }
 
-  /**
-   * Delete an item from the list of items.
-   */
   deleteItem(item) {
     this.items.delete(item);
   }
 
-  /**
-   * Navigate to the detail page for this item.
-   */
   openItem(item: Item) {
     this.navCtrl.push('CategoryPage', {
       item: item
     });
+  }
+
+  _loggedIn(resp) {
+    console.log(resp);
   }
 }

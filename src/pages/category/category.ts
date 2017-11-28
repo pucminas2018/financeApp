@@ -33,9 +33,7 @@ export class CategoryPage {
       this.translateService.get('CATEGORY_ERROR').subscribe((value) => {
         this.categoryErrorString = value;
       })
-      this.translateService.get('CATEGORY_SUCESS').subscribe((value) => {
-        this.categorySucessString = value;
-      })
+        this.categorySucessString = "Categoria cadastrada com sucesso!";
     }
     
   doCategory() {

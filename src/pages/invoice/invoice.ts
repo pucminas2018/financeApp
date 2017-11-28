@@ -18,8 +18,8 @@ export class InvoicePage {
   _user: any;
   invoice: Invoice = new Invoice();
 
-  // Our translated text strings
   private invoiceErrorString: string;
+  private incoiceSucessString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
@@ -30,22 +30,27 @@ export class InvoicePage {
     public api: Api) {
 
       this.invoice = navParams.get('item') || items.defaultItem;
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.invoiceErrorString = value;
-    })
+      this.invoiceErrorString = "Erro ao cadastrar fatura. Verifique seus dados e tente novamente!";
+      this.incoiceSucessString = "Fatura cadastrada com sucesso!";
   }
 
   doInvoice() {
-    // Attempt to login in through our User service
+    
     this.postInvoice(this.invoice).subscribe((resp) => {
       this.navCtrl.push(MainPage);
+      let toast = this.toastCtrl.create({
+        message: this.incoiceSucessString,
+        duration: 6000,
+        position: 'top'
+      });
+      toast.present();
     }, (err) => {
 
       this.navCtrl.push(MainPage);
 
       let toast = this.toastCtrl.create({
         message: this.invoiceErrorString,
-        duration: 3000,
+        duration: 6000,
         position: 'top'
       });
       toast.present();
@@ -56,7 +61,6 @@ export class InvoicePage {
     let seq = this.api.post('fatura', accountInfo, this.option).share();
 
     seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
       if (res.status == 'success') {
         this._loggedIn(res);
       }

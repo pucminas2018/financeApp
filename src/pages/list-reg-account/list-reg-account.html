@@ -1,33 +1,33 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{ 'TAB2_TITLE' | translate }}</ion-title>
+    <ion-navbar>
+        <ion-title>Contas</ion-title>
 
-    <button menuToggle ion-button icon-only clear>
+        <button menuToggle ion-button icon-only clear>
         <ion-icon name="menu"></ion-icon>
       </button>
-  </ion-navbar>
+    </ion-navbar>
 
 </ion-header>
 
 <ion-content>
 
-  <ion-list>
-    <button ion-item *ngFor="let item of currentItems" (click)="openItem(item)"> 
+    <ion-list>
+        <button ion-item *ngFor="let item of currentItems" (click)="openItem(item)"> 
         <h2>{{item.tituloConta}}</h2>
         <p>{{item.tipoConta.descricao }}</p>
         <ion-note item-end *ngIf="item.saldoInicial > 0 " color="primary">{{item.saldoInicial | currency : "BRL":true }}</ion-note>
         <ion-note item-end *ngIf="item.saldoInicial < 0 " color="danger">{{item.saldoInicial | currency : "BRL":true }}</ion-note>
-      </button> 
-      <ion-item-options>
-        <button ion-button color="danger" (click)="deleteItem(item)">
+      </button>
+        <ion-item-options>
+            <button ion-button color="danger" (click)="deleteItem(item)">
           {{ 'DELETE_BUTTON' | translate }}
         </button>
-      </ion-item-options>
-  </ion-list>
+        </ion-item-options>
+    </ion-list>
 
-  <ion-fab right bottom>
-      <button ion-fab (click)="openItem()"><ion-icon name="add" ></ion-icon></button>
-    
+    <ion-fab right bottom>
+        <button ion-fab (click)="openItem()"><ion-icon name="add" ></ion-icon></button>
+
     </ion-fab>
 </ion-content>

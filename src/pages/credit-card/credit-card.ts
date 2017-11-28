@@ -19,8 +19,8 @@ export class CreditCardPage {
   _user: any;
   creditCard: CreditCard = new CreditCard();
   
-  // Our translated text strings
   private creditCardErrorString: string;
+  private creditCardSucessString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
@@ -33,20 +33,25 @@ export class CreditCardPage {
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.creditCardErrorString = value;
     })
+    this.creditCardSucessString = "Cartão de crédico cadastrado com sucesso!"
   }
 
   doCreditCard() {
-    // Attempt to login in through our User service
     this.postCreditCard(this.creditCard).subscribe((resp) => {
       this.navCtrl.push(MainPage);
+      let toast = this.toastCtrl.create({
+        message: this.creditCardSucessString,
+        duration: 6000,
+        position: 'top'
+      });
+      toast.present();
     }, (err) => {
 
       this.navCtrl.push(MainPage);
 
-      // Unable to credit Card
       let toast = this.toastCtrl.create({
         message: this.creditCardErrorString,
-        duration: 3000,
+        duration: 6000,
         position: 'top'
       });
       toast.present();

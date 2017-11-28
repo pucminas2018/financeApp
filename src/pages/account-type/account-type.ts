@@ -1,3 +1,6 @@
+import { ListAccountTypePage } from './../list-account-type/list-account-type';
+import { Api } from './../../providers/api/api';
+import { AccountType } from './domain/account-type';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
@@ -11,42 +14,64 @@ import { MainPage } from '../pages';
   templateUrl: 'account-type.html'
 })
 export class AccountTypePage {
-  // The account fields for the AccountType form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  accountType: { descricao: string } = {
-    descricao: '',
-  };
+  accountType: AccountType;
+  option: any = {"Content-Type":"application/json"}
+  _user: any;
 
-  // Our translated text strings
   private accountTypeErrorString: string;
+  private accountTypeSuccessString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
     public navParams: NavParams, 
     public items: CreditCards,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public api: Api) {
 
     this.accountType = navParams.get('item') || items.defaultItem;
-    this.translateService.get('ACCOUNT_TYPE_ERROR').subscribe((value) => {
-      this.accountTypeErrorString = value;
-    })
+      this.accountTypeErrorString = "Erro ao cadastra o tipo de conta. Verifique seus dados e tente novamente.";
+      this.accountTypeSuccessString = "Cadastro de tipo de conta realizado com sucesso!";
   }
 
-  // Attempt to AccountTypePage in through our User service
   doAccountTypePage() {
-    this.user.login(this.accountType).subscribe((resp) => {
+    this.accountType.usuario = JSON.parse(localStorage.getItem('userLogged'));
+    this.postAccountType(this.accountType).subscribe((resp) => {
+      let toast = this.toastCtrl.create({
+        message: this.accountTypeSuccessString,
+        duration: 6000,
+        position: 'top'
+      });
+      toast.present();
       this.navCtrl.push(MainPage);
+
     }, (err) => {
       this.navCtrl.push(MainPage);
-      // Unable to log in
       let toast = this.toastCtrl.create({
         message: this.accountTypeErrorString,
-        duration: 3000,
+        duration: 6000,
         position: 'top'
       });
       toast.present();
     });
+  }
+
+  postAccountType(accountInfo: any) {
+    let seq = this.api.post('login', accountInfo).share();
+
+    seq.subscribe((res: any) => {
+      if (res.status == 'success') {
+        this._loggedIn(res);
+      } else {
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  _loggedIn(resp) {
+    this._user = resp.user;
   }
 }
