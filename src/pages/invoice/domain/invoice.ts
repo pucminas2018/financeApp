@@ -1,3 +1,4 @@
+import { CreditCard } from './../../credit-card/domain/credit-card';
 import { RegAccount } from './../../reg-account/domain/reg-account';
 export class Invoice {
 
@@ -6,11 +7,12 @@ export class Invoice {
 	dataPagamentoFatura: Date;
     valorTotal: number;
 	mesReferencia: number;
-	cartaoCredito: RegAccount;
+    cartaoCredito: CreditCard;
+
     
     constructor(){
         this.dataFechamentoFatura = new Date();
         this.dataPagamentoFatura = new Date();
-        this.cartaoCredito = new RegAccount();
+        this.cartaoCredito = new CreditCard();
     }
 }

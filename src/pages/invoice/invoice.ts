@@ -1,3 +1,4 @@
+import { CreditCard } from './../credit-card/domain/credit-card';
 import { Api } from './../../providers/api/api';
 import { InvoicePageModule } from './invoice.module';
 import { Invoice } from './domain/invoice';
@@ -17,6 +18,7 @@ export class InvoicePage {
   option: any = {"Content-Type":"application/json"}
   _user: any;
   invoice: Invoice = new Invoice();
+  cartaoCredito: CreditCard = new CreditCard();
 
   private invoiceErrorString: string;
   private incoiceSucessString: string;
@@ -28,14 +30,15 @@ export class InvoicePage {
     public items: Invoices,
     public translateService: TranslateService,
     public api: Api) {
-
+      this.invoice = new Invoice();
       this.invoice = navParams.get('item') || items.defaultItem;
       this.invoiceErrorString = "Erro ao cadastrar fatura. Verifique seus dados e tente novamente!";
       this.incoiceSucessString = "Fatura cadastrada com sucesso!";
   }
 
   doInvoice() {
-    
+    this.invoice.cartaoCredito = this.cartaoCredito;
+    console.log(this.invoice);
     this.postInvoice(this.invoice).subscribe((resp) => {
       this.navCtrl.push(MainPage);
       let toast = this.toastCtrl.create({
