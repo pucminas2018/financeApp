@@ -11,8 +11,6 @@ export class Invoice {
 
     
     constructor(){
-        this.dataFechamentoFatura = new Date();
-        this.dataPagamentoFatura = new Date();
         this.cartaoCredito = new CreditCard();
     }
 }

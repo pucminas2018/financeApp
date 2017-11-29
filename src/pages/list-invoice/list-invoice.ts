@@ -1,3 +1,5 @@
+import { Api } from './../../providers/api/api';
+import { Invoice } from './../invoice/domain/invoice';
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 
@@ -11,21 +13,26 @@ import { Invoices } from '../../providers/providers';
 })
 export class ListInvoicePage {
   currentItems: Item[];
+  option: any = {"Content-Type":"application/json"}
+  invoice: Invoice;
 
-  constructor(public navCtrl: NavController, public items: Invoices, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
+  constructor(public navCtrl: NavController, public items: Invoices, public modalCtrl: ModalController, public api:Api) {
+    this.invoice = new Invoice();
   }
-
-  /**
-   * The view loaded, let's query our items for the list
-   */
   ionViewDidLoad() {
+    this.invoice.cartaoCredito.conta.usuario = JSON.parse(localStorage.getItem('userLogged'));
+    let seq = this.api.get('fatura/'+this.invoice.cartaoCredito.conta.usuario.codUsuario+'/todas/', this.option).share();
+    
+        seq.subscribe((res: any) => {
+          if (res.status == 200) {
+            this.currentItems = JSON.parse(res._body);
+          }
+        }, err => {
+          console.error('ERROR', err);
+        });
+        return seq;
   }
 
-  /**
-   * Prompt the user to add a new item. This shows our ItemCreatePage in a
-   * modal and then adds the new item to our data source if the user created one.
-   */
   addItem() {
     let addModal = this.modalCtrl.create('InvoicePage');
     addModal.onDidDismiss(item => {

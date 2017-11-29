@@ -45,6 +45,7 @@ export class RegAccountPage {
         position: 'top'
       });
       toast.present();
+      
       this.navCtrl.push(ListRegAccountPage);
 
     }, (err) => {

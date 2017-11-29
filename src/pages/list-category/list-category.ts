@@ -25,14 +25,12 @@ export class ListCategoryPage {
     let seq = this.api.get('categoria/todas/'+this.category.usuario.codUsuario, this.option).share();
     
         seq.subscribe((res: any) => {
-          if (res.status == 'success') {
-            console.log(res);
-            this._loggedIn(res);
+          if (res.status == 200) {
+            this.currentItems = JSON.parse(res._body);
           }
         }, err => {
           console.error('ERROR', err);
         });
-    
         return seq;
   }
 

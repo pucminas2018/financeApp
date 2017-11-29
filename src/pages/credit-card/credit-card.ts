@@ -1,3 +1,4 @@
+import { ListCreditCardPage } from './../list-credit-card/list-credit-card';
 import { Api } from './../../providers/api/api';
 import { CreditCard } from './domain/credit-card';
 import { Component } from '@angular/core';
@@ -38,7 +39,7 @@ export class CreditCardPage {
 
   doCreditCard() {
     this.postCreditCard(this.creditCard).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(ListCreditCardPage);
       let toast = this.toastCtrl.create({
         message: this.creditCardSucessString,
         duration: 6000,
@@ -62,7 +63,6 @@ export class CreditCardPage {
     let seq = this.api.post('cartao-credito', accountInfo, this.option).share();
 
     seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
       if (res.status == 'success') {
         this._loggedIn(res);
       }

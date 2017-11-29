@@ -7,8 +7,6 @@ import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angu
 import { User, Items} from '../../providers/providers';
 import { MainPage } from '../pages';
 
-
-
 @IonicPage()
 @Component({
   selector: 'page-transaction',
@@ -21,9 +19,8 @@ export class TransactionPage {
   option: any = {"Content-Type":"application/json"}
   _user: any;
   
-
-  // Our translated text strings
   private transactionErrorString: string;
+  private transactionSucessString: string;
 
   constructor(public navCtrl: NavController, 
     public user: User, 
@@ -34,34 +31,44 @@ export class TransactionPage {
     public api: Api) {
 
       this.transaction = navParams.get('item') || items.defaultItem;
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.transactionErrorString = value;
-    })
+    this.transactionErrorString = "Erro ao salvar lançamento. Verifique seus dados e tente novamente.";
+    this.transactionSucessString = "Lançamento salvo com sucesso.";
   }
 
   doTransaction() {
-    // Attempt to login in through our User service
-    this.user.signup(this.transaction).subscribe((resp) => {
+    this.transaction.dataTransacao = null;
+    this.transaction.conta.usuario = JSON.parse(localStorage.getItem('userLogged'));
+    this.transaction.conta.tipoConta.usuario = JSON.parse(localStorage.getItem('userLogged'));
+    this.transaction.fatura.dataFechamentoFatura = null;
+    this.transaction.fatura.dataPagamentoFatura = null;
+    this.transaction.conta.tipoConta.codTipoConta = 1;
+    this.transaction.fatura.codFatura = 1;
+    console.log(JSON.stringify(this.transaction));
+    this.postTransaction(this.transaction).subscribe((resp) => {
       this.navCtrl.push(MainPage);
+      let toast = this.toastCtrl.create({
+        message: this.transactionSucessString,
+        duration: 6000,
+        position: 'top'
+      });
+      toast.present();
     }, (err) => {
 
       this.navCtrl.push(MainPage);
 
-      // Unable to credit transaction
       let toast = this.toastCtrl.create({
         message: this.transactionErrorString,
-        duration: 3000,
+        duration: 6000,
         position: 'top'
       });
       toast.present();
     });
   }
 
-  postSignup(accountInfo: any) {
-    let seq = this.api.post('usuario', accountInfo, this.option).share();
+  postTransaction(accountInfo: any) {
+    let seq = this.api.post('transacao', accountInfo, this.option).share();
 
     seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
       if (res.status == 'success') {
         this._loggedIn(res);
       }

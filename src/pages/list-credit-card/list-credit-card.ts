@@ -1,3 +1,6 @@
+import { Account } from './../signup/domain/account';
+import { Api } from './../../providers/api/api';
+import { CreditCard } from './../credit-card/domain/credit-card';
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 
@@ -11,21 +14,29 @@ import { CreditCards } from '../../providers/providers';
 })
 export class ListCreditCardPage {
   currentItems: Item[];
+  creditCard: CreditCard;
+  account: Account;
+  option: any = {"Content-Type":"application/json"}
 
-  constructor(public navCtrl: NavController, public items: CreditCards, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
+  constructor(public navCtrl: NavController, public items: CreditCards, public modalCtrl: ModalController,public api: Api) {
+    this.creditCard = new CreditCard();
   }
 
-  /**
-   * The view loaded, let's query our items for the list
-   */
   ionViewDidLoad() {
+    this.account = JSON.parse(localStorage.getItem('userLogged'));
+    let seq = this.api.get('cartao-credito/todos/'+this.account.codUsuario, this.option).share();
+    
+        seq.subscribe((res: any) => {
+          if (res.status == 200) {
+            this.currentItems = JSON.parse(res._body);
+          }
+        }, err => {
+          console.error('ERROR', err);
+        });
+        return seq;
   }
 
-  /**
-   * Prompt the user to add a new item. This shows our ItemCreatePage in a
-   * modal and then adds the new item to our data source if the user created one.
-   */
+
   addItem() {
     let addModal = this.modalCtrl.create('CreditCardPage');
     addModal.onDidDismiss(item => {
@@ -36,16 +47,10 @@ export class ListCreditCardPage {
     addModal.present();
   }
 
-  /**
-   * Delete an item from the list of items.
-   */
   deleteItem(item) {
     this.items.delete(item);
   }
 
-  /**
-   * Navigate to the detail page for this item.
-   */
   openItem(item: Item) {
     this.navCtrl.push('CreditCardPage', {
       item: item

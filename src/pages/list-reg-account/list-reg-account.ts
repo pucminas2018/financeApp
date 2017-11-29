@@ -1,3 +1,5 @@
+import { Api } from './../../providers/api/api';
+import { RegAccount } from './../reg-account/domain/reg-account';
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 
@@ -11,12 +13,25 @@ import { RegAccounts } from '../../providers/providers';
 })
 export class ListRegAccountPage {
   currentItems: Item[];
+  conta: RegAccount;
+  option: any = {"Content-Type":"application/json"}
 
-  constructor(public navCtrl: NavController, public items: RegAccounts, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
+  constructor(public navCtrl: NavController, public items: RegAccounts, public modalCtrl: ModalController, public api: Api) {
+  this.conta = new RegAccount();
   }
 
   ionViewDidLoad() {
+    this.conta.usuario = JSON.parse(localStorage.getItem('userLogged'));
+    let seq = this.api.get('conta/todas/'+this.conta.usuario.codUsuario, this.option).share();
+    
+        seq.subscribe((res: any) => {
+          if (res.status == 200) {
+            this.currentItems = JSON.parse(res._body);
+          }
+        }, err => {
+          console.error('ERROR', err);
+        });
+        return seq;
   }
 
   addItem() {

@@ -1,3 +1,7 @@
+import { AccountType } from './../account-type/domain/account-type';
+import { Item } from './../../models/item';
+import { Account } from './../signup/domain/account';
+import { ListInvoicePage } from './../list-invoice/list-invoice';
 import { CreditCard } from './../credit-card/domain/credit-card';
 import { Api } from './../../providers/api/api';
 import { InvoicePageModule } from './invoice.module';
@@ -19,9 +23,12 @@ export class InvoicePage {
   _user: any;
   invoice: Invoice = new Invoice();
   cartaoCredito: CreditCard = new CreditCard();
+  account: Account
+  optionsCardCredit: Item[]
+  itens: any[];
 
   private invoiceErrorString: string;
-  private incoiceSucessString: string;
+  private invoiceSucessString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
@@ -32,17 +39,37 @@ export class InvoicePage {
     public api: Api) {
       this.invoice = new Invoice();
       this.invoice = navParams.get('item') || items.defaultItem;
-      this.invoiceErrorString = "Erro ao cadastrar fatura. Verifique seus dados e tente novamente!";
-      this.incoiceSucessString = "Fatura cadastrada com sucesso!";
+      this.invoiceErrorString = "Erro ao salvar fatura. Verifique seus dados e tente novamente!";
+      this.invoiceSucessString = "Fatura salva com sucesso!";
+  }
+
+  ionViewDidLoad() {
+    this.account = JSON.parse(localStorage.getItem('userLogged'));
+    let seq = this.api.get('cartao-credito/todos/'+this.account.codUsuario, this.option).share();
+    
+        seq.subscribe((res: any) => {
+          if (res.status == 200) {
+            this.itens = JSON.parse(res._body);
+            this.optionsCardCredit = [];
+            this.itens.forEach(item => {
+              this.optionsCardCredit.push({value: item.codCartaoCredito, label: item.limite })
+            })
+          }
+        }, err => {
+          console.error('ERROR', err);
+        });
+        return seq;
   }
 
   doInvoice() {
     this.invoice.cartaoCredito = this.cartaoCredito;
-    console.log(this.invoice);
+    this.invoice.cartaoCredito.conta.tipoConta = new AccountType();
+    this.invoice.cartaoCredito.conta.tipoConta.usuario = JSON.parse(localStorage.getItem('userLogged'));
+    this.invoice.cartaoCredito.conta.usuario = JSON.parse(localStorage.getItem('userLogged'));
     this.postInvoice(this.invoice).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(ListInvoicePage);
       let toast = this.toastCtrl.create({
-        message: this.incoiceSucessString,
+        message: this.invoiceSucessString,
         duration: 6000,
         position: 'top'
       });
