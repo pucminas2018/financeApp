@@ -31,10 +31,8 @@ export class CreditCardPage {
     public translateService: TranslateService,
     public api: Api) {
     this.creditCard = navParams.get('item') || items.defaultItem;
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.creditCardErrorString = value;
-    })
-    this.creditCardSucessString = "Cartão de crédico cadastrado com sucesso!"
+      this.creditCardErrorString = "Erro ao salvar o cartão de crédito";
+    this.creditCardSucessString = "Cartão de crédico salvo com sucesso!"
   }
 
   doCreditCard() {

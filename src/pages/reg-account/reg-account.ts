@@ -29,8 +29,8 @@ export class RegAccountPage {
     public api: Api) {
 
     this.regAccount = navParams.get('item') || items.defaultItem;
-    this.regAccountErrorString = "Erro ao cadastrar uma conta. Verifique seus dados e tente novamente.";
-    this.regAccountSucessString = "Conta cadastrada com sucesso!";
+    this.regAccountErrorString = "Erro ao salvar a conta.";
+    this.regAccountSucessString = "Conta salva com sucesso!";
   }
 
   doRegAccount() {
@@ -50,7 +50,7 @@ export class RegAccountPage {
 
     }, (err) => {
 
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(RegAccountPage);
 
       let toast = this.toastCtrl.create({
         message: this.regAccountErrorString,

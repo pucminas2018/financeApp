@@ -39,7 +39,7 @@ export class InvoicePage {
     public api: Api) {
       this.invoice = new Invoice();
       this.invoice = navParams.get('item') || items.defaultItem;
-      this.invoiceErrorString = "Erro ao salvar fatura. Verifique seus dados e tente novamente!";
+      this.invoiceErrorString = "Erro ao salvar a fatura.";
       this.invoiceSucessString = "Fatura salva com sucesso!";
   }
 

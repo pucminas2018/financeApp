@@ -29,9 +29,7 @@ export class SignupPage {
     public translateService: TranslateService,
     public api: Api) {
 
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.signupErrorString = value;
-    })
+      this.signupErrorString = "Não foi possível efetuar o cadastro";
     this.signupSucessString = "Cadastro realizado com sucesso!";
   }
 

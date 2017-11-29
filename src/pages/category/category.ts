@@ -30,10 +30,8 @@ export class CategoryPage {
     public api: Api) {
 
       this.category = navParams.get('item') || items.defaultItem;      
-      this.translateService.get('CATEGORY_ERROR').subscribe((value) => {
-        this.categoryErrorString = value;
-      })
-        this.categorySucessString = "Categoria cadastrada com sucesso!";
+        this.categoryErrorString = "Erro ao salvar a categoria.";
+        this.categorySucessString = "Categoria salva com sucesso!";
     }
     
   doCategory() {

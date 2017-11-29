@@ -27,10 +27,7 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public translateService: TranslateService,
     public api: Api) {
-
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
+      this.loginErrorString = "Não foi possível efetuar o login. Verifique o e-mail e a senha e tente novamente.";
   }
 
   doLogin() {

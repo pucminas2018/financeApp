@@ -30,11 +30,11 @@ export class AccountTypePage {
     public api: Api) {
 
     this.accountType = navParams.get('item') || items.defaultItem;
-      this.accountTypeErrorString = "Erro ao cadastra o tipo de conta. Verifique seus dados e tente novamente.";
-      this.accountTypeSuccessString = "Cadastro de tipo de conta realizado com sucesso!";
+      this.accountTypeErrorString = "Erro ao salvar o tipo de conta.";
+      this.accountTypeSuccessString = "Tipo de conta salvo com sucesso!";
   }
 
-  doAccountTypePage() {
+  doAccountType() {
     this.accountType.usuario = JSON.parse(localStorage.getItem('userLogged'));
     this.postAccountType(this.accountType).subscribe((resp) => {
       let toast = this.toastCtrl.create({
@@ -43,10 +43,10 @@ export class AccountTypePage {
         position: 'top'
       });
       toast.present();
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(ListAccountTypePage);
 
     }, (err) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(AccountTypePage);
       let toast = this.toastCtrl.create({
         message: this.accountTypeErrorString,
         duration: 6000,
@@ -57,12 +57,11 @@ export class AccountTypePage {
   }
 
   postAccountType(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo).share();
+    let seq = this.api.post('tipo-conta', accountInfo, this.option).share();
 
     seq.subscribe((res: any) => {
       if (res.status == 'success') {
         this._loggedIn(res);
-      } else {
       }
     }, err => {
       console.error('ERROR', err);

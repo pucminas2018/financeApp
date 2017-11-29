@@ -31,7 +31,7 @@ export class TransactionPage {
     public api: Api) {
 
       this.transaction = navParams.get('item') || items.defaultItem;
-    this.transactionErrorString = "Erro ao salvar lançamento. Verifique seus dados e tente novamente.";
+    this.transactionErrorString = "Erro ao salvar o lançamento.";
     this.transactionSucessString = "Lançamento salvo com sucesso.";
   }
 
