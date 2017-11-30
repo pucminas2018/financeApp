@@ -49,16 +49,11 @@ export class InvoicePage {
     
         seq.subscribe((res: any) => {
           if (res.status == 200) {
-            this.itens = JSON.parse(res._body);
-            this.optionsCardCredit = [];
-            this.itens.forEach(item => {
-              this.optionsCardCredit.push({value: item.codCartaoCredito, label: item.limite })
-            })
+            this.optionsCardCredit = JSON.parse(res._body);
           }
         }, err => {
           console.error('ERROR', err);
         });
-        return seq;
   }
 
   doInvoice() {
@@ -66,6 +61,10 @@ export class InvoicePage {
     this.invoice.cartaoCredito.conta.tipoConta = new AccountType();
     this.invoice.cartaoCredito.conta.tipoConta.usuario = JSON.parse(localStorage.getItem('userLogged'));
     this.invoice.cartaoCredito.conta.usuario = JSON.parse(localStorage.getItem('userLogged'));
+    localStorage.setItem('dataFechamento', this.invoice.dataFechamentoFatura.toString());
+    localStorage.setItem('dataPagamento', this.invoice.dataPagamentoFatura.toString());
+    this.invoice.dataFechamentoFatura = null;
+    this.invoice.dataPagamentoFatura = null;
     this.postInvoice(this.invoice).subscribe((resp) => {
       this.navCtrl.push(ListInvoicePage);
       let toast = this.toastCtrl.create({

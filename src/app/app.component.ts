@@ -33,7 +33,6 @@ export class MyApp {
 
   pages: any[] = [
     { title: 'Início', component: 'TabsPage' },
-    { title: 'Lançamentos', component: 'ListMasterPage' },
     { title: 'Categoria', component: 'ListCategoryPage' },
     { title: 'Tipo da Conta', component: 'ListAccountTypePage' },
     { title: 'Conta', component: 'ListRegAccountPage' },

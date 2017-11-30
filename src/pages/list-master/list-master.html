@@ -1,10 +1,10 @@
 <ion-header>
 
-  <ion-navbar>
-    
-      <ion-title>{{ 'TAB1_TITLE' | translate }}</ion-title>
+    <ion-navbar>
 
-      <button menuToggle ion-button icon-only clear>
+        <ion-title> Finances App</ion-title>
+
+        <button menuToggle ion-button icon-only clear>
         <ion-icon name="menu"></ion-icon>
       </button>
 
@@ -13,23 +13,9 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-list>
-      <button ion-item *ngFor="let item of currentItems" (click)="openItem(item)">        
-        <h2>{{item.descricao}}</h2>
-        <p>{{item.categoria.descricao}}</p>
-        <ion-note item-end *ngIf="item.tipoTransacao == 'credito'" color="primary">{{item.valor | currency : "BRL":true }}</ion-note>
-        <ion-note item-end *ngIf="item.tipoTransacao == 'debito'" color="danger">{{item.valor | currency : "BRL":true }}</ion-note>
-      </button> 
-      <ion-item-options>
-        <button ion-button color="danger" (click)="deleteItem(item)">
-          {{ 'DELETE_BUTTON' | translate }}
-        </button>
-      </ion-item-options>
-  </ion-list>
-
-  <ion-fab right bottom>
-      <button ion-fab (click)="openItem()"><ion-icon name="add" ></ion-icon></button>
-    
-    </ion-fab>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12 class="centralizado"><img src="assets/imgs/logo.png" class="logo" /></ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

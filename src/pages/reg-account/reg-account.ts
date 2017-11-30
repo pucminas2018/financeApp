@@ -1,3 +1,4 @@
+import { AccountType } from './../account-type/domain/account-type';
 import { ListRegAccountPage } from './../list-reg-account/list-reg-account';
 import { Api } from './../../providers/api/api';
 import { RegAccount } from './domain/reg-account';
@@ -17,6 +18,8 @@ export class RegAccountPage {
   regAccount: RegAccount = new RegAccount();
   option: any = { "Content-Type": "application/json" }
   _user: any;
+  tipoContaList: AccountType[] =[];
+  tipoConta:AccountType = new AccountType();
 
   private regAccountErrorString: string;
   private regAccountSucessString: string;
@@ -33,12 +36,26 @@ export class RegAccountPage {
     this.regAccountSucessString = "Conta salva com sucesso!";
   }
 
+  ionViewDidLoad() {
+    this.tipoConta.usuario = JSON.parse(localStorage.getItem('userLogged'));
+    let seq = this.api.get('tipo-conta/todos/'+this.tipoConta.usuario.codUsuario, this.option).share();
+    
+        seq.subscribe((res: any) => {
+          if (res.status == 200) {
+            this.tipoContaList = JSON.parse(res._body);
+          }
+        }, err => {
+          console.error('ERROR', err);
+        });
+  }
+
   doRegAccount() {
     this.regAccount.usuario = JSON.parse(localStorage.getItem('userLogged'));
     this.regAccount.tipoConta.usuario = JSON.parse(localStorage.getItem('userLogged'));
     this.regAccount.codConta = 0;
     this.postRegAccount(this.regAccount).subscribe((resp) => {
 
+      this.navCtrl.push(ListRegAccountPage);
       let toast = this.toastCtrl.create({
         message: this.regAccountSucessString,
         duration: 6000,
@@ -46,7 +63,6 @@ export class RegAccountPage {
       });
       toast.present();
       
-      this.navCtrl.push(ListRegAccountPage);
 
     }, (err) => {
 

@@ -24,9 +24,10 @@
             <ion-item>
                 <ion-label>{{ 'REG_ACCOUNT_TYPECONT' | translate }}</ion-label>
                 <ion-select [(ngModel)]="regAccount.tipoConta.codTipoConta" name="codTipoConta">
-                    <ion-option value="1">Conta Corrente</ion-option>
-                    <ion-option value="2">Conta Poupança</ion-option>
-                    <ion-option value="3">Conta Carteira</ion-option>
+                    <div *ngFor="let tipoConta of tipoContaList">
+                        <ion-option value="{{tipoConta.codTipoConta}}">{{tipoConta.descricao}}
+                        </ion-option>
+                    </div>
                 </ion-select>
             </ion-item>
 

@@ -40,9 +40,10 @@
                 <ion-label>Cartão de Crédito</ion-label>
                 <ion-select [(ngModel)]="cartaoCredito.codCartaoCredito" name="codCartaoCredito">
 
-                    <ion-option value="1">12312323</ion-option>
-                    <ion-option value="2">52416516</ion-option>
-                    <ion-option value="3">84785211</ion-option>
+                    <div *ngFor="let cartao of optionsCardCredit">
+                        <ion-option value="{{cartao.codCartaoCredito}}">{{cartao.operadora}} -R${{cartao.limite}}
+                        </ion-option>
+                    </div>
 
                 </ion-select>
             </ion-item>

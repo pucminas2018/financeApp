@@ -30,9 +30,10 @@
             <ion-item>
                 <ion-label>{{ 'CONTA' | translate }}</ion-label>
                 <ion-select [(ngModel)]="creditCard.conta.codConta" name="codConta">
-                    <ion-option value="1">16515615</ion-option>
-                    <ion-option value="2">52416516</ion-option>
-                    <ion-option value="3">84785211</ion-option>
+                    <div *ngFor="let conta of contaList">
+                        <ion-option value="{{conta.codConta}}">{{conta.tituloConta}}
+                        </ion-option>
+                    </div>
                 </ion-select>
             </ion-item>
 
